@@ -1,7 +1,7 @@
 {
   "name": "coursera-sidetabs",
   "displayName": "Coursera SideTabs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Coursera SideTabs moves Coursera's tabs to a side panel for better organisation and focus",
   "author": "Ahmet Katranci",
   "packageManager": "pnpm@9.4.0",
@@ -27,7 +27,7 @@
   },
   "manifest": {
     "host_permissions": [
-      "https://*/*"
+      "https://*.coursera.org/*"
     ]
   }
 }
