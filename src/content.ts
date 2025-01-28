@@ -1,4 +1,5 @@
 import type { PlasmoCSConfig } from "plasmo"
+import debounce from "debounce"
 
 export const config: PlasmoCSConfig = {
   matches: ["https://www.coursera.org/*"]
@@ -31,9 +32,14 @@ function init(videoPlayerRow, lectureTitleRow) {
   initialised = true
 
   const videoPlayerContainer = document.getElementById("video-player-container")
-  const tabsContainer = lectureTitleRow.nextSibling
-  videoPlayerRow.appendChild(tabsContainer)
-
+  
+  let tabsContainer = lectureTitleRow.nextSibling
+  if (tabsContainer) {
+    videoPlayerRow.appendChild(tabsContainer)
+  } else {
+    tabsContainer = videoPlayerContainer.nextSibling
+  }
+  
   const videoPlayerContainerHeight = videoPlayerContainer.offsetHeight
   const tabList = tabsContainer.firstElementChild
   const transcriptTabPanelId = tabList.nextSibling.id
@@ -78,17 +84,26 @@ function applyStyles(videoPlayerContainerHeight, transcriptTabPanelId) {
   styleElement.innerHTML = css
 }
 
-function startOnNavigation() {
+function restart() {
+  initialised = false
+  start()
+}
+
+function handleNavigation() {
   let currentUrl = location.href
 
   setInterval(() => {
     if (location.href !== currentUrl) {
       currentUrl = location.href
-      initialised = false
-      start()
+      restart()
     }
   }, 1000);
 }
 
+function handleWindowResize() {
+  window.addEventListener("resize", debounce(restart, 200))
+}
+
 start()
-startOnNavigation()
+handleNavigation()
+handleWindowResize()
