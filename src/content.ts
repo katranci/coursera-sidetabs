@@ -38,6 +38,10 @@ function init(videoPlayerRow, lectureTitleRow) {
   const tabList = tabsContainer.firstElementChild
   const transcriptTabPanelId = tabList.nextSibling.id
 
+  applyStyles(videoPlayerContainerHeight, transcriptTabPanelId)
+}
+
+function applyStyles(videoPlayerContainerHeight, transcriptTabPanelId) {
   const css = `
     #video-player-row {
       flex-wrap: nowrap;
@@ -63,10 +67,15 @@ function init(videoPlayerRow, lectureTitleRow) {
       margin-left: 0;
     }`
 
-  const styleElement = document.createElement('style')
-  styleElement.type = 'text/css'
+  let styleElement = document.getElementById("coursera-sidetabs-styles")
+
+  if (!styleElement) {
+    styleElement = document.createElement('style')
+    styleElement.id = "coursera-sidetabs-styles"
+    document.head.appendChild(styleElement)
+  }
+
   styleElement.innerHTML = css
-  document.head.appendChild(styleElement)
 }
 
 function startOnNavigation() {
