@@ -2,7 +2,7 @@
   "name": "coursera-sidetabs",
   "displayName": "Coursera SideTabs",
   "version": "0.0.2",
-  "description": "Coursera SideTabs moves Coursera's tabs to a side panel for better organisation and focus",
+  "description": "Coursera SideTabs moves Coursera's tabs to a side panel, keeping you organised and focused for a better learning experience.",
   "author": "Ahmet Katranci",
   "packageManager": "pnpm@9.4.0",
   "scripts": {
